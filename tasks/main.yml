@@ -1,0 +1,27 @@
+---
+- name: Check if minikube is already installed
+  ansible.builtin.command: "minikube version --short"
+  register: mi_minikube_info
+  changed_when: false
+  failed_when: false
+
+- name: Download minikube binary
+  ansible.builtin.get_url:
+    url: "{{ mi_download_url }}"
+    dest: "/tmp/minikube-linux-{{ mi_architecture }}"
+    mode: 0755
+  when: mi_minikube_info.rc != 0
+
+- name: Copy minikube binary to bin dir
+  ansible.builtin.copy:
+    src: "/tmp/minikube-linux-{{ mi_architecture }}"
+    dest: "{{ mi_bin_dir }}/minikube"
+    remote_src: true
+    mode: 0755
+  when: mi_minikube_info.rc != 0
+
+- name: Delete minikube binary in /tmp dir
+  ansible.builtin.file:
+    path: "/tmp/minikube-linux-{{ mi_architecture }}"
+    state: absent
+  when: mi_minikube_info.rc != 0
