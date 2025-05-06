@@ -1,0 +1,4 @@
+---
+mi_architecture: "{{ 'amd64' if ansible_architecture == 'x86_64' else ansible_architecture }}"
+mi_download_base_url: "https://github.com/kubernetes/minikube/releases/download"
+mi_download_url: "{{ mi_download_base_url }}/{{ mi_version }}/minikube-linux-{{ mi_architecture }}"
