@@ -1,0 +1,15 @@
+---
+galaxy_info:
+  author: William Bridge
+  role_name: minikube_installer
+  namespace: willbrid
+  description: Minikube installation for RedHat/Rocky and Debian/Ubuntu
+  license: license MIT
+  min_ansible_version: "2.16"
+  galaxy_tags:
+    - container
+    - orchestration
+    - kubernetes
+    - development
+    - system
+dependencies: []
