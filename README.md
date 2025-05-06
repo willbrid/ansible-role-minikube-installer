@@ -19,6 +19,48 @@ Système Linux.
 
 Aucune.
 
+## Exemple Playbook
+
+- Installation du rôle
+
+```bash
+mkdir -p $HOME/install-minikube/roles
+```
+
+```bash
+vim $HOME/install-minikube/requirements.yml
+```
+
+```yaml
+- name: ansible-role-minikube-installer
+  src: https://github.com/willbrid/ansible-role-minikube-installer.git
+  version: v0.0.1
+```
+
+```bash
+cd $HOME/install-minikube && ansible-galaxy install -r requirements.yml --roles-path roles
+```
+
+- Utilisation du rôle dans un playbook
+
+```bash
+vim $HOME/install-minikube/playbook.yml
+```
+
+```yaml
+---
+- hosts: localhost
+  vars:
+    mi_version: "v1.35.0"
+
+  roles:
+    - ansible-role-minikube-installer
+```
+
+```bash
+cd $HOME/install-minikube && ansible-playbook playbook.yml
+```
+
 ## Licence
 
 MIT
