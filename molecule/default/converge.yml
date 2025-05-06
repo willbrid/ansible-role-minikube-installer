@@ -1,0 +1,11 @@
+---
+- name: Converge
+  hosts: all
+  gather_facts: true
+  vars:
+    mi_version: "v1.35.0"
+
+  tasks:
+    - name: Include willbrid.minikube_installer
+      ansible.builtin.include_role:
+        name: "willbrid.minikube_installer"
