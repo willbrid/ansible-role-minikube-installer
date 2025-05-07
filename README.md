@@ -2,7 +2,7 @@
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/willbrid/ansible-role-minikube-installer/blob/main/LICENSE) [![CI](https://github.com/willbrid/ansible-role-minikube-installer/actions/workflows/ci.yml/badge.svg)](https://github.com/willbrid/ansible-role-minikube-installer/actions/workflows/ci.yml)
 
-Ce rôle Ansible permet d’installer **Minikube** sur un système Linux (distributions RedHat et Debian), en tenant compte de l’architecture matérielle (comme amd64, arm64, etc.). Il automatise le téléchargement binaire de la version spécifiée et configure **Minikube** pour une utilisation immédiate.
+Le rôle **ansible-role-minikube-installer** permet d’installer **Minikube** sur un système Linux (distributions RedHat et Debian), en tenant compte de l’architecture matérielle (comme amd64, arm64, etc.). Il automatise le téléchargement binaire de la version spécifiée et configure **Minikube** pour une utilisation immédiate.
 
 ## Exigences
 
@@ -12,8 +12,9 @@ Système Linux.
 
 |Nom|Type|Description|Obligatoire|Valeur par défaut|
 |---|----|-----------|-----------|-----------------|
-`mi_version`|str|numéro de version de minikube. Format : vx.y.z|non|`"v1.35.0"`
-`mi_bin_dir`|str|répertoire d'installation du binaire de minikube|non|`"/usr/local/bin`
+`minikube_version`|str|numéro de version de minikube. Format : vx.y.z|non|`"v1.35.0"`
+`minikube_bin_dir`|str|répertoire d'installation du binaire de minikube|non|`"/usr/local/bin`
+`should_verify_minikube_checksum`|bool|dire s'il faut vérifier l'intégrité du fichier binaire de minikube après téléchargement|non|`true`
 
 ## Dépendances
 
@@ -33,8 +34,8 @@ vim $HOME/install-minikube/requirements.yml
 
 ```yaml
 - name: ansible-role-minikube-installer
-  src: https://github.com/willbrid/ansible-role-minikube-installer.git
-  version: v0.0.1
+  src: git+https://github.com/willbrid/ansible-role-minikube-installer.git
+  version: v1.0.0
 ```
 
 ```bash
@@ -51,7 +52,8 @@ vim $HOME/install-minikube/playbook.yml
 ---
 - hosts: localhost
   vars:
-    mi_version: "v1.35.0"
+    minikube_version: "v1.35.0"
+    should_verify_minikube_checksum: true
 
   roles:
     - ansible-role-minikube-installer
