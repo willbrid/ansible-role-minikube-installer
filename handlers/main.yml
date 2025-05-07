@@ -1,0 +1,6 @@
+---
+- name: Cleanup all minikube installation items
+  ansible.builtin.file:
+    path: "{{ item.path }}"
+    state: absent
+  loop: "{{ minikube_installation_items_to_delete.files }}"
