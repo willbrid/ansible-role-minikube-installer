@@ -3,16 +3,16 @@
   hosts: all
   gather_facts: false
   vars:
-    mi_bin_dir: "/usr/local/bin"
-    mi_version: "v1.35.0"
+    minikube_bin_dir: "/usr/local/bin"
+    minikube_version: "v1.35.0"
 
   tasks:
     - name: Get minikube binary version
-      ansible.builtin.command: "{{ mi_bin_dir }}/minikube version --short"
-      register: mi_minikube_info
+      ansible.builtin.command: "{{ minikube_bin_dir }}/minikube version --short"
+      register: minikube_info
       changed_when: false
     - name: Check minikube correct version
       ansible.builtin.assert:
         that:
-          - mi_minikube_info.stdout == mi_version
+          - minikube_info.stdout == minikube_version
         fail_msg: "incorrect version of minikube"
