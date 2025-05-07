@@ -1,0 +1,51 @@
+---
+- name: Download minikube binary in /tmp dir
+  ansible.builtin.get_url:
+    url: "{{ minikube_download_url }}"
+    dest: "/tmp/minikube-linux-{{ host_architecture }}"
+    mode: 0755
+
+- name: Download minikube binary checksum in /tmp dir
+  ansible.builtin.get_url:
+    url: "{{ minikube_download_url }}.sha256"
+    dest: "/tmp/minikube-linux-{{ host_architecture }}.sha256"
+    mode: 0755
+  when: should_verify_minikube_checksum
+
+- name: Update minikube checksum file to inclure minikube binary name
+  ansible.builtin.lineinfile:
+    path: "/tmp/minikube-linux-{{ host_architecture }}.sha256"
+    regexp: '^(.*)$'
+    line: '\1  minikube-linux-{{ host_architecture }}'
+    backrefs: true
+  when: should_verify_minikube_checksum
+
+- name: Verify minikube binary file checksum
+  ansible.builtin.shell: "cd /tmp && sha256sum -c /tmp/minikube-linux-{{ host_architecture }}.sha256"
+  register: minikube_checksum_result
+  changed_when: false
+  when: should_verify_minikube_checksum
+
+- name: Check if minikube binary file checksum is correct
+  ansible.builtin.assert:
+    that:
+      - minikube_checksum_result.rc == 0
+    fail_msg: "the minikube binary checksum is not correct"
+  when: should_verify_minikube_checksum
+
+- name: Copy minikube binary to bin dir
+  ansible.builtin.copy:
+    src: "/tmp/minikube-linux-{{ host_architecture }}"
+    dest: "{{ minikube_bin_dir }}/minikube"
+    remote_src: true
+    mode: 0755
+
+- name: Find files in /tmp starting with minikube
+  ansible.builtin.find:
+    paths: "/tmp"
+    patterns: "^minikube.*"
+    use_regex: true
+    file_type: file
+  register: minikube_installation_items_to_delete
+  notify: Cleanup all minikube installation items
+  changed_when: true
