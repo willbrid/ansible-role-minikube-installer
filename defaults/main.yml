@@ -1,3 +1,4 @@
 ---
-mi_version: "v1.35.0"
-mi_bin_dir: "/usr/local/bin"
+minikube_version: "v1.35.0"
+minikube_bin_dir: "/usr/local/bin"
+should_verify_minikube_checksum: true
