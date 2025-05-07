@@ -13,7 +13,7 @@ Système Linux.
 |Nom|Type|Description|Obligatoire|Valeur par défaut|
 |---|----|-----------|-----------|-----------------|
 `minikube_version`|str|numéro de version de minikube. Format : vx.y.z|non|`"v1.35.0"`
-`minikube_bin_dir`|str|répertoire d'installation du binaire de minikube|non|`"/usr/local/bin`
+`minikube_bin_dir`|str|répertoire d'installation du binaire de minikube|non|`"/usr/local/bin"`
 `should_verify_minikube_checksum`|bool|dire s'il faut vérifier l'intégrité du fichier binaire de minikube après téléchargement|non|`true`
 
 ## Dépendances
