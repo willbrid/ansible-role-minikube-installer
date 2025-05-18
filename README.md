@@ -6,7 +6,7 @@ Le rôle **ansible-role-minikube-installer** permet d’installer **Minikube** s
 
 ## Exigences
 
-Système Linux.
+- Systèmes Linux : distributions RedHat et Debian
 
 ## Description des Variables
 
