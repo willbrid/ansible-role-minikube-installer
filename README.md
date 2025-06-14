@@ -25,7 +25,7 @@ Aucune.
 - Installation du rôle
 
 ```bash
-mkdir -p $HOME/install-minikube/roles
+mkdir -p $HOME/install-minikube
 ```
 
 ```bash
@@ -39,7 +39,7 @@ vim $HOME/install-minikube/requirements.yml
 ```
 
 ```bash
-cd $HOME/install-minikube && ansible-galaxy install -r requirements.yml --roles-path roles
+cd $HOME/install-minikube && ansible-galaxy install --force -r requirements.yml
 ```
 
 - Utilisation du rôle dans un playbook
