@@ -51,6 +51,8 @@ vim $HOME/install-minikube/playbook.yml
 ```yaml
 ---
 - hosts: localhost
+  become: true
+
   vars:
     minikube_version: "v1.35.0"
     should_verify_minikube_checksum: true
