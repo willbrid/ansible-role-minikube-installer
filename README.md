@@ -2,27 +2,27 @@
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/willbrid/ansible-role-minikube-installer/blob/main/LICENSE) [![CI](https://github.com/willbrid/ansible-role-minikube-installer/actions/workflows/ci.yml/badge.svg)](https://github.com/willbrid/ansible-role-minikube-installer/actions/workflows/ci.yml)
 
-Le rôle **ansible-role-minikube-installer** permet d’installer **Minikube** sur un système Linux (distributions RedHat et Debian), en tenant compte de l’architecture matérielle (comme amd64, arm64, etc.). Il automatise le téléchargement binaire de la version spécifiée et configure **Minikube** pour une utilisation immédiate.
+The **ansible-role-minikube-installer** role allows you to install **Minikube** on a Linux system (Red Hat and Debian distributions), taking into account the hardware architecture (such as amd64, arm64, etc.). It automates the binary download of the specified version and configures **Minikube** for immediate use.
 
-## Exigences
+## Requirements
 
-- Systèmes Linux : distributions RedHat et Debian
+- Linux systems: Red Hat and Debian distributions
 
-## Description des Variables
+## Description of Variables
 
-|Nom|Type|Description|Obligatoire|Valeur par défaut|
-|---|----|-----------|-----------|-----------------|
-`minikube_version`|str|numéro de version de minikube. Format : vx.y.z|non|`"v1.35.0"`
-`minikube_bin_dir`|str|répertoire d'installation du binaire de minikube|non|`"/usr/local/bin"`
-`should_verify_minikube_checksum`|bool|dire s'il faut vérifier l'intégrité du fichier binaire de minikube après téléchargement|non|`true`
+|Name|Type|Description|Mandatory|Default value|
+|--- |----|-----------|---------|-------------|
+`minikube_version`|str|Minikube version number. Format: vx.y.z|no|`"v1.35.0"`
+`minikube_bin_dir`|str|minikube binary installation directory|no|`"/usr/local/bin"`
+`should_verify_minikube_checksum`|bool|specify whether the integrity of the minikube binary file should be checked after downloading|no|`true`
 
-## Dépendances
+## Dependencies
 
-Aucune.
+None.
 
-## Exemple Playbook
+## Example Playbook
 
-- Installation du rôle
+- Role installation
 
 ```bash
 mkdir -p $HOME/install-minikube
@@ -42,7 +42,7 @@ vim $HOME/install-minikube/requirements.yml
 cd $HOME/install-minikube && ansible-galaxy install --force -r requirements.yml
 ```
 
-- Utilisation du rôle dans un playbook
+- Using the role in a playbook
 
 ```bash
 vim $HOME/install-minikube/playbook.yml
@@ -65,10 +65,10 @@ vim $HOME/install-minikube/playbook.yml
 cd $HOME/install-minikube && ansible-playbook playbook.yml
 ```
 
-## Licence
+## License
 
 MIT
 
-## Informations sur l'auteur
+## Author Information
 
 William Bridge NGASSAM
